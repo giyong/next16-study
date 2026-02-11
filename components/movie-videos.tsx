@@ -3,6 +3,9 @@ import styles from "../styles/movie-videos.module.css";
 
 async function getVideos(id:string) {
     const response = await fetch(`${API_URL}/${id}/videos`);
+    if (!response.ok) {
+        throw new Error("Failed to fetch movies");
+    }
     return response.json();
 }
 
