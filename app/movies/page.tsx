@@ -1,7 +1,7 @@
 import type { Metadata, ResolvingMetadata } from 'next'
 import { Suspense } from "react";
-import MovieInfo, { getMovieInfo } from "../../../components/movie-info";
-import MovieVideos from "../../../components/movie-videos";
+import MovieInfo, { getMovieInfo } from "../../components/movie-info";
+import MovieVideos from "../../components/movie-videos";
 
 // export const metadata = {
 //     title : "Movies"
