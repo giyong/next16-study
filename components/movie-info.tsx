@@ -3,7 +3,7 @@ import styles from "../styles/movie-info.module.css";
 
 
 export async function getMovieInfo(id:string) {
-    const response = await fetch(`${API_URL}?id=${id}`);
+    const response = await fetch(`${API_URL}/${id}`);
     if (!response.ok) {
         throw new Error("Failed to fetch movies");
     }
