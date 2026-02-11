@@ -31,7 +31,7 @@ export default async function HomePage() {
                     {/* <span className="bg-primary/20 text-primary border border-primary/30 backdrop-blur-md text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">Featured Today</span> */}
                     <div className="flex items-center gap-1.5 py-1 px-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-full">
                     <span className="material-icons text-yellow-500 text-sm">star</span>
-                    <span className="font-bold text-white text-sm">{movie.vote_average.toFixed(1)}</span>
+                    <span className="font-bold text-white text-sm">{movie.vote_average ? movie.vote_average.toFixed(1) : "0"}</span>
                     </div>
                 </div>
                 <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tight text-white leading-none">{movie.title}</h1>
