@@ -9,27 +9,27 @@ import { getMovies } from '../../(home)/page';
 // };
 
 interface IParams {
-    params: {id : string};
+    params: { id: string };
 }
 
 export async function generateStaticParams() {
-  const movies = await getMovies()
+    const movies = await getMovies()
 
-  return movies.map((movie) => ({
-    id: movie.id.toString(),
-  }))
+    return movies.map((movie) => ({
+        id: movie.id.toString(),
+    }))
 }
 
-export async function generateMetadata({ params } : IParams) {
+export async function generateMetadata({ params }: IParams) {
     const { id } = await params;
     const movie = await getMovieInfo(id);
 
     return {
-        title : movie.title
+        title: movie.title
     };
 }
 
-export default async function MovieDetail({ params } : IParams) {
+export default async function MovieDetail({ params }: IParams) {
     const { id } = await params;
 
     return (
@@ -37,9 +37,10 @@ export default async function MovieDetail({ params } : IParams) {
             <Suspense fallback={<h1>Loading... MovieInfo</h1>}>
                 <MovieInfo id={id} />
             </Suspense>
-            
+
             <Suspense fallback={<h1>Loading... MovieVideos</h1>}>
                 <MovieVideos id={id} />
             </Suspense>
-        </div>);
+        </div>
+    );
 }

@@ -2,7 +2,7 @@ import { API_URL } from "../app/contants";
 import styles from "../styles/movie-info.module.css";
 
 
-export async function getMovieInfo(id:string) {
+export async function getMovieInfo(id: string) {
     const response = await fetch(`${API_URL}/${id}`);
     if (!response.ok) {
         throw new Error("Failed to fetch movies");
@@ -10,9 +10,9 @@ export async function getMovieInfo(id:string) {
     return response.json();
 }
 
-export default async function MovieInfo({id} : {id:string}) {
+export default async function MovieInfo({ id }: { id: string }) {
     const movie = await getMovieInfo(id);
-    
+
     return (
         <div className={styles.container}>
             <img src={movie.poster_path} className={styles.poster} alt={movie.title} />

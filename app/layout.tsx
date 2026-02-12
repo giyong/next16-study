@@ -18,14 +18,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         {/* <Script
           src="../js/tailwindcss.js"
           strategy="afterInteractive"
         /> */}
       </head>
       <body className="dark:bg-obsidian transition-colors duration-500">
-        <Navigation />
+        {/* <Navigation /> */}
         {children}
         <Footer />
       </body>
