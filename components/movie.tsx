@@ -17,7 +17,7 @@ export default function Movie({ id, title, poster_path, vote_average, release_da
 
     // 영화 상세 화면으로 이동
     const goPageMovie = () => {
-        router.push(`/movies?id=${id}`);
+        router.push(`/movies/${id}`);
     };
 
     return (
