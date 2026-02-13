@@ -5,6 +5,7 @@ import { getMovies } from "./page";
 import Movie from "../../components/movie";
 // import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 interface IMovieProps1 {
     title: string;
@@ -19,28 +20,39 @@ interface IMovieProps1 {
 const PAGE_SIZE = 5;
 
 export default function HomePageMovieList() {
-    console.log("HomePageMovieList");
     const [res, setRes] = useState([]);
     const [movieArr, setMovieArr] = useState([]);
     const [pageNo, setPageNo] = useState(1);
     const [isNextBtn, setIsNextBtn] = useState(true);
     const [movie, setMovie] = useState({} as IMovieProps1);
+    const [search, setSearch] = useState("");
 
-    // const router = useRouter();
+    let query = useSearchParams().get("query");
 
-    // const handleLogo = () => {
-    //     router.push("/");
-    // };
+    if (!query) {
+        query = "";
+    }
+
+    const router = useRouter();
+
+    // 영화 상세 화면으로 이동
+    const goPageMovie = (id) => {
+        router.push(`/movies/${id}`);
+    };
+
+    const searchMovieList = (query) => {
+        let arr = res.filter((o) => o.title.toUpperCase().indexOf(query.toUpperCase()) > -1);
+
+        if (arr.length > 0) {
+            setMovieArr(arr);
+            setMovie(arr[0]);
+            setIsNextBtn(false);
+        }
+    };
 
     const handleSearchInput = (e) => {
         if (e.key === "Enter") {
-            let arr = res.filter((o) => o.title.toUpperCase().indexOf(e.target.value.toUpperCase()) > -1);
-
-            if (arr.length > 0) {
-                setMovieArr(arr);
-                setMovie(arr[0]);
-                setIsNextBtn(false);
-            }
+            searchMovieList(e.target.value);
         }
     };
 
@@ -61,12 +73,21 @@ export default function HomePageMovieList() {
             setRes(res);
             setMovieArr(res.slice(0, PAGE_SIZE * pageNo));
             setMovie(res[0]);
-            // console.log(res[0].backdrop_path);
+
+            if (query != "") {
+                let arr = res.filter((o) => o.title.toUpperCase().indexOf(query.toUpperCase()) > -1);
+
+                if (arr.length > 0) {
+                    setMovieArr(arr);
+                    setMovie(arr[0]);
+                    setIsNextBtn(false);
+                }
+            }
         });
     }, []);
 
     return (
-        <div>
+        <>
             <nav className="sticky top-0 z-50 nav-blur border-b border-glass-border">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-20">
@@ -96,7 +117,7 @@ export default function HomePageMovieList() {
                                     <span className="material-icons text-slate-500 text-lg group-focus-within:text-primary transition-colors">search</span>
                                 </span>
                                 {/* 검색어  */}
-                                <input onKeyUp={handleSearchInput} className="block w-full pl-12 pr-4 py-3 border border-glass-border rounded-2xl bg-white/5 text-sm focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white/10 placeholder-slate-500 transition-all text-white outline-none" placeholder="Search movies, actors, directors..." type="text" />
+                                <input onKeyDown={handleSearchInput} className="block w-full pl-12 pr-4 py-3 border border-glass-border rounded-2xl bg-white/5 text-sm focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white/10 placeholder-slate-500 transition-all text-white outline-none" placeholder="Search movies, actors, directors..." type="text" />
                             </div>
                         </div>
                         <div className="flex items-center gap-8">
@@ -135,7 +156,7 @@ export default function HomePageMovieList() {
                             <span className="material-icons">play_arrow</span>
                             Watch Trailer
                             </button> */}
-                            <button className="bg-white/5 hover:bg-white/10 backdrop-blur-md text-white px-10 py-4 rounded-2xl font-bold border border-white/10 transition-all flex items-center gap-3">
+                            <button onClick={() => goPageMovie(movie.id)} className="bg-white/5 hover:bg-white/10 backdrop-blur-md text-white px-10 py-4 rounded-2xl font-bold border border-white/10 transition-all flex items-center gap-3 cursor-pointer">
                                 <span className="material-icons text-sm">info</span>
                                 DETAILS
                             </button>
@@ -204,6 +225,6 @@ export default function HomePageMovieList() {
                 ) : null
                 }
             </main>
-        </div>
+        </>
     );
 }
