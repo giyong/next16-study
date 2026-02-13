@@ -46,7 +46,7 @@ export default async function MovieDetail({ params }: IParams) {
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9NsKj-0vzWDXZzKqzR6tRlv0hTO_wC6pTt7AKdly36vUlxOENH-fg1bmzf5rrW_A2ls43hV9fh39wjMeh6N_GsRGqQhSK6L5pO35E8T2D_wztHZ3WlV1iMBBaf4bcZlsxIAhEgdMrukCQObfUnug-A0Z9I5RyRXtGtMa6WWU3iLDK1al6gYrPMPzoSeSs8MEDneZeuA5GliAvFNJxy_dVceVM2Tjp5oj6RO-SWnYCUXhHO7Xpoa_8NmGXAsrnOSBkhQNoDYdrgeyp" />
                 <div className="absolute inset-0 backdrop-overlay"></div>
             </div>
-            <main className="relative z-10 pt-32 pb-20 px-6 max-w-7xl mx-auto">
+            <main className="relative z-10 pt-10 pb-20 px-6 max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                     <Suspense fallback={<h1>Loading... MovieInfoImg</h1>}>
                         <MovieInfoImg id={id} />
