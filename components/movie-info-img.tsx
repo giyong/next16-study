@@ -1,6 +1,4 @@
 import { API_URL } from "../app/contants";
-import styles from "../styles/movie-info.module.css";
-
 
 export async function getMovieInfoImg(id: string) {
     const response = await fetch(`${API_URL}/${id}`);
@@ -53,33 +51,9 @@ export default async function MovieInfoImg({ id }: { id: string }) {
                                 <span className="font-medium text-emerald-400">${movie.revenue.toLocaleString()}</span>
                             </div>
                         </div>
-                        {/* <div className="space-y-4 pt-2">
-                            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">Director</h4>
-                            <div className="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/5">
-                                <div
-                                    className="w-10 h-10 rounded-full bg-dark-card flex items-center justify-center border border-white/10">
-                                    <span className="material-icons text-primary text-xl">person</span>
-                                </div>
-                                <div>
-                                    <p className="font-bold text-sm text-white">Denis Villeneuve</p>
-                                    <p className="text-[10px] text-white/40 uppercase">Director</p>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
             </aside>
-
-
-            {/* <div className={styles.container}>
-                <img src={movie.poster_path} className={styles.poster} alt={movie.title} />
-                <div className={styles.info}>
-                    <h1 className={styles.title}>{movie.title}</h1>
-                    <h3>평점 : {movie.vote_average ? movie.vote_average.toFixed(1) : "0"}</h3>
-                    <p>{movie.overview}</p>
-                    <a href={movie.homepage} target={"_blank"}>Homepage &rarr;</a>
-                </div>
-            </div> */}
         </>
     );
 }
